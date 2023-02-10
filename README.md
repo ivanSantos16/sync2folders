@@ -1,6 +1,6 @@
 <a src='https://www.rplumber.io/'><img src='logo.png' align="right" height="138.5" style="margin:10px;" /></a>
 
-![software-version](https://custom-icon-badges.demolab.com/badge/Version-v0.1.0-gray.svg?labelColor=informational&logo=stack) 
+![software-version](https://custom-icon-badges.demolab.com/badge/Version-v1.0.1-gray.svg?labelColor=informational&logo=stack) 
 ![software-state](https://custom-icon-badges.demolab.com/badge/Status%20-Under%20Development-gray.svg?labelColor=informational&logo=gear) 
 [![PyPI version](https://badge.fury.io/py/sync2folders.svg)](https://badge.fury.io/py/sync2folders)
 
@@ -15,7 +15,7 @@
 
 <br>
 
-## Features
+## **Features**
 
 - [x] Synchronization is one-way: after the synchronization content of the replica folder is modified to exactly match content of the source folder;
 - [x] Synchronization is performed periodically;
@@ -24,7 +24,9 @@
 
 <br>
 
-## Quick Start
+## **Quick Start**
+
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Get The Script From Git Hub Repo**
 
 Inside a folder of your choice, clone the repository from command line:
 
@@ -35,7 +37,9 @@ git clone https://github.com/ivanSantos16/sync2folders
 You can run the program from the command line and ask for help with the script variables:
 
 ```bash
-python sync2folders/synchronisation.py -h                                                                             usage: synchronisation.py [-h] -s SOURCE -r REPLICA -p PERIOD -l LOGS
+python sync2folders -h                                                                             
+
+usage: synchronisation.py [-h] -s SOURCE -r REPLICA -p PERIOD -l LOGS
 
 Synchronizes two folders: source and replica
 
@@ -65,31 +69,81 @@ options:
 First example:
 
 ```bash
-python sync2folders.py <source_folder_path> <replica_folder_path> <sync_interval> <log_file_path>
+python sync2folders -s <source_folder_path> -r <replica_folder_path> -p <sync_interval> -l <log_file_path>
 ```
 
 ```bash
-python sync2folders.py source replica 10 logs/logs.txt
+python sync2folders -s source -r replica -p 10 -l logs/logs.txt
 ```
 <br>
 
 Second example:
 
 ```bash
-python sync2folders.py -s <source_folder_path> -r <replica_folder_path> -p <sync_interval> -l <log_file_path>
+python sync2folders --source <source_folder_path> --replica <replica_folder_path> --period <sync_interval> --logs <log_file_path>
 ```
 
 ```bash
-python sync2folders.py -s source -r replica -p 10 -l logs/logs.txt
+python sync2folders --source source --replica replica --period 10 --logs logs/logs.txt
+```
+
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Get The Script From Pypi**
+
+From command line, install the package with pip:
+
+```bash
+python -m pip install sync2folders
+```
+
+From anywhere, you can run the program from the command line and ask for help with the script variables:
+
+```bash
+python -m sync2folders -h                                                 
+
+usage: synchronisation.py [-h] -s SOURCE -r REPLICA -p PERIOD -l LOGS
+
+Synchronizes two folders: source and replica
+
+options:
+  -h, --help            show this help message and exit
+  -s SOURCE, --source SOURCE
+                        Source folder path
+  -r REPLICA, --replica REPLICA
+                        Replica folder path
+  -p PERIOD, --period PERIOD
+                        Period of time in seconds between each synchronization
+  -l LOGS, --logs LOGS  Logs file path
+```
+
+<br>
+
+### Arguments Description
+- `source` : Source folder path (required) [string]
+- `replica` : Replica folder path (required) [string]
+- `period` : Period of time in seconds between each synchronization (required) [int]
+- `logs` : Logs file path (required) [string]
+
+<br>
+
+### Different examples of running the program.
+
+First example:
+
+```bash
+python -m sync2folders -s <source_folder_path> -r <replica_folder_path> -p <sync_interval> -l <log_file_path>
+```
+
+```bash
+python -m sync2folders -s source -r replica -p 10 -l logs/logs.txt
 ```
 <br>
 
-Third example:
+Second example:
 
 ```bash
-python sync2folders.py --source <source_folder_path> --replica <replica_folder_path> --period <sync_interval> --logs <log_file_path>
+python -m sync2folders --source <source_folder_path> --replica <replica_folder_path> --period <sync_interval> --logs <log_file_path>
 ```
 
 ```bash
-python sync2folders.py --source source --replica replica --period 10 --logs logs/logs.txt
+python -m sync2folders --source source --replica replica --period 10 --logs logs/logs.txt
 ```

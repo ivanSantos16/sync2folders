@@ -10,12 +10,12 @@ import datetime
 
     Author: Ivan Santos
     
-    This module provides synchronization process methods for synchronizing two folders: source and replica.
+    This module provides synchronisation process methods for synchronizing two folders: source and replica.
     sync2folders maintains a full, identical copy of source folder at replica folder. It implements the following features:
-    - Synchronization is one-way: after the synchronization content of the replica folder is modified to exactly match content of the source folder;
-    - Synchronization is performed periodically;
+    - synchronisation is one-way: after the synchronisation content of the replica folder is modified to exactly match content of the source folder;
+    - synchronisation is performed periodically;
     - File creation/copying/removal operations are logged to a file and to the console output;
-    - Folder paths, synchronization interval and log file path are provided using the command line arguments;
+    - Folder paths, synchronisation interval and log file path are provided using the command line arguments;
 
     This file can also be imported as a module and contains the following functions:
         * check_path_replica_folder - checks if the replica folder path exists
@@ -36,19 +36,19 @@ def main():
     parser = argparse.ArgumentParser(description='Synchronizes two folders: source and replica')
     parser.add_argument('-s', '--source', help='Source folder path', type=str, required=True)
     parser.add_argument('-r', '--replica', help='Replica folder path', type=str, required=True)
-    parser.add_argument('-p', '--period', help='Period of time in seconds between each synchronization', type=int, required=True)
+    parser.add_argument('-p', '--period', help='Period of time in seconds between each synchronisation', type=int, required=True)
     parser.add_argument('-l', '--logs', help='Logs file path', type=str, required=True)
     args = parser.parse_args()
-    synchronization(args.source, args.replica, args.period, args.logs)
+    synchronisation(args.source, args.replica, args.period, args.logs)
 
-def synchronization(source_folder_path: str, replica_folder_path: str, period: int, logs_path: str):
+def synchronisation(source_folder_path: str, replica_folder_path: str, period: int, logs_path: str):
     '''
-    synchronization: starts the synchronisation process and calls the necessary methods.
+    synchronisation: starts the synchronisation process and calls the necessary methods.
     
     Args:
         source_folder_path (string): source folder path.
         replica_folder_path (string): replica folder path.
-        period (int): period of time in seconds between each synchronization.
+        period (int): period of time in seconds between each synchronisation.
         logs_path (string): logs file path.
     
     Return:
