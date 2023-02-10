@@ -11,7 +11,7 @@
 
 <p style="text-align: justify;">This is a simple program that synchronizes two folders: source and replica. The program maintains a full, identical copy of source folder at replica folder. The program is written in Python.</p>
 
-<p style="text-align: justify;">The program is designed to be run from the command line. It takes three arguments: source folder path, replica folder path and synchronization interval. The program synchronizes the folders every time the interval expires. The program logs file creation/copying/removal operations to a file and to the console output.</p>
+<p style="text-align: justify;">The program is designed to be run from the command line. It takes four arguments: source folder path, replica folder path, synchronization interval and logs path. The program synchronizes the folders every time the interval expires. The program logs file creation/copying/removal operations to a file and to the console output.</p>
 
 <br>
 
