@@ -5,7 +5,7 @@
 [![PyPI version](https://badge.fury.io/py/sync2folders.svg)](https://badge.fury.io/py/sync2folders)
 
 ![software-owner](https://custom-icon-badges.demolab.com/badge/Owner%20-Ivan%20Santos-gray.svg?labelColor=informational&logo=person)
-<a href="mailto:ivan@atlasmga.com" rel="nofollow">![owner-contact: ivan@atlasmga.com](https://custom-icon-badges.demolab.com/badge/Contact%20-ivan@atlasmga.com-gray.svg?labelColor=informational&logo=mail)</a>
+<a href="mailto:ivan.rafa.16@gmail.com" rel="nofollow">![owner-contact: ivan.rafa.16@gmail.com](https://custom-icon-badges.demolab.com/badge/Contact%20-ivan.rafa.16@gmail.com-gray.svg?labelColor=informational&logo=mail)</a>
 <br>
 <h1 style="text-align: left;">sync<span style="color: #00b336">$\color[rgb]{0,0.67,0.2} 2$</span>folders</h1>
 
