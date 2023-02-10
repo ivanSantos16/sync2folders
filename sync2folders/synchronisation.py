@@ -271,7 +271,7 @@ def copyFile(source: str, replica: str, logs_path: str, src_modifitcationTime: f
     os.utime(replica, (datetime.datetime.now().timestamp(), src_modifitcationTime))
     saveLogs(datetime.datetime.now(), 'COPY', source, replica, path=logs_path)
 
-def saveLogs(timestamp: str, action: str, source: str, replica: str, user='ADMIN', path='logs/logs.txt'):
+def saveLogs(timestamp: str, action: str, source=None, replica=None, user='ADMIN', path='logs/logs.txt'):
     """
     saveLogs: save logs in a file in the logs folder and print to the consolte the action performed.
 
