@@ -300,7 +300,5 @@ def saveLogs(timestamp: str, action: str, source: str, replica: str, user='ADMIN
     print(message)
     print("\n")
 
-# syncFolder("source", "replica", "logs/logs.txt")
-
 if __name__ == "__main__":
     main()
