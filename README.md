@@ -7,7 +7,7 @@
 ![software-owner](https://custom-icon-badges.demolab.com/badge/Owner%20-Ivan%20Santos-gray.svg?labelColor=informational&logo=person)
 <a href="mailto:ivan@atlasmga.com" rel="nofollow">![owner-contact: ivan@atlasmga.com](https://custom-icon-badges.demolab.com/badge/Contact%20-ivan@atlasmga.com-gray.svg?labelColor=informational&logo=mail)</a>
 <br>
-<h1 style="text-align: left;">sync<span style="color: #00b336">2</span>folders</h1>
+<h1 style="text-align: left;">sync<span style="color: #00b336">$\color[rgb]{0,0.67,0.2} 2$</span>folders</h1>
 
 <p style="text-align: justify;">This is a simple program that synchronizes two folders: source and replica. The program maintains a full, identical copy of source folder at replica folder. The program is written in Python.</p>
 
