@@ -79,7 +79,6 @@ def syncFolder(source_folder_path: str, replica_folder_path: str, logs_path: str
 
     """
 
-    # delete itens in replica folder that are not in source folder
     for item in os.listdir(replica_folder_path):
         source_folder_item_path = os.path.join(source_folder_path, item)
         replica_folder_item_path = os.path.join(replica_folder_path, item)
