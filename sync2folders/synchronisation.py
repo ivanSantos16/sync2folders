@@ -6,10 +6,31 @@ import time
 import datetime
 
 
-""" 
+"""sync2folders - Synchronizes two folders: source and replica.
+
     Author: Ivan Santos
     
-    This module provides synchronization process methods.
+    This module provides synchronization process methods for synchronizing two folders: source and replica.
+    sync2folders maintains a full, identical copy of source folder at replica folder. It implements the following features:
+    - Synchronization is one-way: after the synchronization content of the replica folder is modified to exactly match content of the source folder;
+    - Synchronization is performed periodically;
+    - File creation/copying/removal operations are logged to a file and to the console output;
+    - Folder paths, synchronization interval and log file path are provided using the command line arguments;
+
+    This file can also be imported as a module and contains the following functions:
+        * check_path_replica_folder - checks if the replica folder path exists
+        * check_path_source_folder - checks if the source folder path exists
+        * copyFile - copies a file from source folder to replica folder
+        * createFile - creates a file in replica folder
+        * deleteFile - deletes a file from replica folder
+        * deleteFolder - deletes a folder from replica folder
+        * getFileHash - gets the hash of a file
+        * getFileSize - gets the size of a file
+        * getFileStamp - gets the stamp of a file
+        * saveLogs - saves logs to a file and to the console output
+        * syncFile - synchronizes a file
+        * syncFolder - synchronizes a folder
+        * main - the main function of the script
 """
 def main():
     parser = argparse.ArgumentParser(description='Synchronizes two folders: source and replica')
@@ -20,7 +41,7 @@ def main():
     args = parser.parse_args()
     synchronization(args.source, args.replica, args.period, args.logs)
 
-def synchronization(source_folder_path, replica_folder_path, period, logs_path):
+def synchronization(source_folder_path: str, replica_folder_path: str, period: int, logs_path: str):
     '''
     synchronization: starts the synchronisation process and calls the necessary methods.
     
@@ -31,11 +52,11 @@ def synchronization(source_folder_path, replica_folder_path, period, logs_path):
         logs_path (string): logs file path.
     
     Return:
-        Synchronizes two folders: source and replica.
+        Synchronized two folders: source and replica. Raises an exception if the source folder path is not a folder. 
     '''
 
     check_path_source_folder(source_folder_path)
-    check_path_replica_folder(replica_folder_path)
+    check_path_replica_folder(source_folder_path, replica_folder_path, logs_path)
 
     if os.path.isdir(source_folder_path):
         while True:
@@ -45,7 +66,7 @@ def synchronization(source_folder_path, replica_folder_path, period, logs_path):
         raise Exception('#ERROR#: {} IS NOT A FOLDER!'.format(source_folder_path))
 
 
-def syncFolder(source_folder_path, replica_folder_path, logs_path):
+def syncFolder(source_folder_path: str, replica_folder_path: str, logs_path: str):
     """
     syncFolder: synchronizes two folders: source and replica.
 
@@ -54,8 +75,8 @@ def syncFolder(source_folder_path, replica_folder_path, logs_path):
         replica_folder_path (string): replica folder path.
         logs_path (string): logs file path.
     
-    Return:
-        Synchronizes two folders: source and replica.
+    Raises an exception if the source folder path is not a folder or a file.
+
     """
 
     # delete itens in replica folder that are not in source folder
@@ -93,17 +114,15 @@ def syncFolder(source_folder_path, replica_folder_path, logs_path):
             raise Exception('#ERROR#: {} IS NEITHER A FILE NOR A FOLDER!'.
                             format(source_folder_item_path))
 
-def syncFile(source_file_path, replica_file_path, logs_path):
+def syncFile(source_file_path: str, replica_file_path: str, logs_path: str):
     """
-    syncFile: synchronizes two files: source and replica.
+    syncFile: synchronizes two files and logs the operations performed to log file and console output.
 
     Args:
         source_file_path (string): source file path.
         replica_file_path (string): replica file path.
         logs_path (string): logs file path.
     
-    Return:
-        Synchronizes two files: source and replica.
     """
     sourceFileTime = getFileStamp(source_file_path)
     
@@ -124,28 +143,28 @@ def syncFile(source_file_path, replica_file_path, logs_path):
         copyFile(source_file_path, replica_file_path, logs_path, sourceFileTime)
         return
 
-def check_path_source_folder(source_folder_path):
+def check_path_source_folder(source_folder_path: str):
     """
     check_path_source_folder: checks if the source folder path is valid.
 
     Args:
         source_folder_path (string): source folder path.
 
-    Return:
-        Raises an exception if the source folder path is not valid.
+    Raises an exception if the source folder path is not valid.
     """
     if not os.path.exists(source_folder_path):
         raise Exception('#ERROR#: {} NOT EXISTS!'.format(source_folder_path))
 
-def check_path_replica_folder(replica_folder_path):
+def check_path_replica_folder(source_folder_path: str, replica_folder_path: str, logs_path: str):
     """
-    check_path_replica_folder: checks if the replica folder path is valid.
+    check_path_replica_folder: checks if the replica folder path is valid and creates a new folder if it does not exist. Calls the saveLogs method to log the operation performed.
 
     Args:
+        source_folder_path (string): source folder path.
         replica_folder_path (string): replica folder path.
+        logs_path (string): logs file path.
 
-    Return:
-        Raises an exception if the replica folder path is not valid.
+    Raises an exception if the replica folder path is not valid.
     """
     if not os.path.exists(replica_folder_path):
         new_dir = input('WARNING! {} not exists, do you want to make a new dir? yes(y) or exit(n): '.format(replica_folder_path)).strip()
@@ -154,14 +173,15 @@ def check_path_replica_folder(replica_folder_path):
 
         if new_dir == 'y' or new_dir == 'yes':
             os.mkdir(replica_folder_path)
+            saveLogs(datetime.datetime.now(), 'CREATE', source_folder_path, replica_folder_path, path=logs_path)
         else:
             print('Thanks for your visit!')
             time.sleep(2)
             os._exit(os.X_OK)
 
-def getFileStamp(file):
+def getFileStamp(file: str) -> float:
     """
-    getFileTime: gets the file time.
+    getFileTime: gets the file last modification time.
 
     Args:
         file (string): file path.
@@ -171,7 +191,7 @@ def getFileStamp(file):
     """
     return os.path.getmtime(file)
 
-def getFileSize(file):
+def getFileSize(file: str) -> int:
     """
     getFileSize: gets the file size.
 
@@ -183,9 +203,9 @@ def getFileSize(file):
     """
     return os.path.getsize(file)
 
-def getFileHash(file):
+def getFileHash(file: str) -> str:
     """
-    getFileHash: gets the file hash.
+    getFileHash: gets the file hash using md5 algorithm.
 
     Args:
         file (string): file path.
@@ -195,46 +215,39 @@ def getFileHash(file):
     """
     return hashlib.md5(open(file,'rb').read()).hexdigest()
 
-def deleteFolder(replica, logs_path):
+def deleteFolder(replica: str, logs_path: str):
     """
-    deleteFolder: delete a folder.
+    deleteFolder: delete a folder and its content, and call the method to record the action performed in the logs.
 
     Args:
         replica (string): replica folder path.
         logs_path (string): logs file path.
     
-    Return:
-        Deletes the folder.
     """
     os.rmdir(replica)
     saveLogs(datetime.datetime.now(), 'DELETE', replica=replica, path=logs_path)
 
-def deleteFile(replica, logs_path):
+def deleteFile(replica: str, logs_path: str):
     """
-    deleteFile: delete a file.
+    deleteFile: delete a file and call the method to record the action performed in the logs.
 
     Args:
         replica (string): replica file path.
         logs_path (string): logs file path.
     
-    Return:
-        Deletes the file and records in the logs.
     """
     os.remove(replica)
     saveLogs(datetime.datetime.now(), 'DELETE', replica=replica, path=logs_path)
 
-def createFile(source, replica, logs_path, src_modifitcationTime):
+def createFile(source: str, replica: str, logs_path: str, src_modifitcationTime: float):
     """
-    createFile: create a file.
-
+    createFile: create a file from source to replica and call the method to record the action performed in the logs.
     Args:
         source (string): source file path.
         replica (string): replica file path.
         logs_path (string): logs file path.
         src_modifitcationTime (string): source file modification time.
 
-    Return:
-        Creates the file.
     """
     if not os.path.exists(os.path.dirname(replica)):
         os.makedirs(os.path.dirname(replica))
@@ -242,18 +255,16 @@ def createFile(source, replica, logs_path, src_modifitcationTime):
     os.utime(replica, (datetime.datetime.now().timestamp(), src_modifitcationTime))
     saveLogs(datetime.datetime.now(), 'CREATE', source, replica, path=logs_path)
 
-def copyFile(source, replica, logs_path, src_modifitcationTime):
+def copyFile(source: str, replica: str, logs_path: str, src_modifitcationTime: float):
     """
-    copyFile: copy a file from source to replica.
+    copyFile: copy a file from source to replica and call the method to record the action performed in the logs.
 
     Args:
         source (string): source file path.
-        replica (string): replica file path.ç
+        replica (string): replica file path.
         logs_path (string): logs file path.
         src_modifitcationTime (string): source file modification time.
-    
-    Return:
-        Copies the file from source to replica.
+
     """
     if not os.path.exists(os.path.dirname(replica)):
         os.makedirs(os.path.dirname(replica))
@@ -261,9 +272,9 @@ def copyFile(source, replica, logs_path, src_modifitcationTime):
     os.utime(replica, (datetime.datetime.now().timestamp(), src_modifitcationTime))
     saveLogs(datetime.datetime.now(), 'COPY', source, replica, path=logs_path)
 
-def saveLogs(timestamp, action, source=None, replica=None, user='ADMIN', path='logs/logs.txt'):
+def saveLogs(timestamp: str, action: str, source: str, replica: str, user='ADMIN', path='logs/logs.txt'):
     """
-    saveLogs: save logs in a file.
+    saveLogs: save logs in a file in the logs folder and print to the consolte the action performed.
 
     Args:
         timestamp (string): timestamp of the action.
@@ -273,8 +284,6 @@ def saveLogs(timestamp, action, source=None, replica=None, user='ADMIN', path='l
         user (string): user.
         path (string): logs file path.
 
-    Return:
-        Saves the logs in a file and print to console.
     """
     if not os.path.exists(path):
         os.makedirs(os.path.dirname(path))
