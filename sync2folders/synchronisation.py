@@ -287,11 +287,11 @@ def saveLogs(timestamp: str, action: str, source=None, replica=None, user='ADMIN
     if not os.path.exists(path):
         os.makedirs(os.path.dirname(path))
     if action == 'DELETE':
-        message = 'Timestamp: {} | Action: {} | From: {} | User: {} |'.format(timestamp, action, replica, user)
+        message = 'Timestamp: {} | Action: {} | From: {} | User: {} |'.format(timestamp, action, replica.replace("\\", "/" ), user)
     elif action == 'COPY':
-        message = 'Timestamp: {} | Action: {} | From: {} | To: {} | User: {} |'.format(timestamp, action, source, replica, user)
+        message = 'Timestamp: {} | Action: {} | From: {} | To: {} | User: {} |'.format(timestamp, action, source.replace("\\", "/" ), replica.replace("\\", "/" ), user)
     elif action == 'CREATE':
-        message = 'Timestamp: {} | Action: {} | From: {} | To: {} | User: {} |'.format(timestamp, action, source, replica, user)
+        message = 'Timestamp: {} | Action: {} | From: {} | To: {} | User: {} |'.format(timestamp, action, source.replace("\\", "/" ), replica.replace("\\", "/" ), user)
     with open(path, 'a') as f:
         f.write(message)
         f.write('\n')
