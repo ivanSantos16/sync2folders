@@ -25,8 +25,8 @@
 <br>
 
 ## **Quick Start**
-
-## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Get The Script From Git Hub Repo**
+<details>
+  <summary><h2><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get The Script From Git Hub Repo</strong></h2></summary>
 
 Inside a folder of your choice, clone the repository from command line:
 
@@ -86,8 +86,11 @@ python sync2folders --source <source_folder_path> --replica <replica_folder_path
 ```bash
 python sync2folders --source source --replica replica --period 10 --logs logs/logs.txt
 ```
+</details>
+  
+<details open>
+<summary><h2><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get The Script From Pypi</strong></h2></summary>
 
-## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Get The Script From Pypi**
 
 From command line, install the package with pip:
 
@@ -147,3 +150,4 @@ python -m sync2folders --source <source_folder_path> --replica <replica_folder_p
 ```bash
 python -m sync2folders --source source --replica replica --period 10 --logs logs/logs.txt
 ```
+</details open>
