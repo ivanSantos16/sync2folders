@@ -1,17 +1,12 @@
 <a src='https://www.rplumber.io/'><img src='logo.png' align="right" height="138.5" style="margin:10px;" /></a>
 
-<br>
-<br>
-
 ![software-version](https://custom-icon-badges.demolab.com/badge/Version-v0.1.0-gray.svg?labelColor=informational&logo=stack) 
 ![software-state](https://custom-icon-badges.demolab.com/badge/Status%20-Under%20Development-gray.svg?labelColor=informational&logo=gear) 
+[![PyPI version](https://badge.fury.io/py/sync2folders.svg)](https://badge.fury.io/py/sync2folders)
+
 ![software-owner](https://custom-icon-badges.demolab.com/badge/Owner%20-Ivan%20Santos-gray.svg?labelColor=informational&logo=person)
 <a href="mailto:ivan@atlasmga.com" rel="nofollow">![owner-contact: ivan@atlasmga.com](https://custom-icon-badges.demolab.com/badge/Contact%20-ivan@atlasmga.com-gray.svg?labelColor=informational&logo=mail)</a>
-
-
-[![PyPI version](https://badge.fury.io/py/sync2folders.svg)](https://badge.fury.io/py/sync2folders)
 <br>
-
 <h1 style="text-align: left;">sync<span style="color: #00b336">2</span>folders</h1>
 
 <p style="text-align: justify;">This is a simple program that synchronizes two folders: source and replica. The program maintains a full, identical copy of source folder at replica folder. The program is written in Python.</p>
