@@ -39,7 +39,7 @@ You can run the program from the command line and ask for help with the script v
 ```bash
 python sync2folders -h                                                                             
 
-usage: synchronisation.py [-h] -s SOURCE -r REPLICA -p PERIOD -l LOGS
+usage:  __main__.py [-h] -s SOURCE -r REPLICA -p PERIOD -l LOGS
 
 Synchronizes two folders: source and replica
 
@@ -103,7 +103,7 @@ From anywhere, you can run the program from the command line and ask for help wi
 ```bash
 python -m sync2folders -h                                                 
 
-usage: synchronisation.py [-h] -s SOURCE -r REPLICA -p PERIOD -l LOGS
+usage:  __main__.py [-h] -s SOURCE -r REPLICA -p PERIOD -l LOGS
 
 Synchronizes two folders: source and replica
 
