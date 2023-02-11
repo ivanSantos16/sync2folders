@@ -21,6 +21,7 @@ import datetime
         * check_path_replica_folder - checks if the replica folder path exists
         * check_path_source_folder - checks if the source folder path exists
         * copyFile - copies a file from source folder to replica folder
+        * cleanReplicaFolder - cleans a replica folder
         * createFile - creates a file in replica folder
         * deleteFile - deletes a file from replica folder
         * deleteFolder - deletes a folder from replica folder
@@ -85,7 +86,11 @@ def syncFolder(source_folder_path: str, replica_folder_path: str, logs_path: str
 
         if os.path.isdir(replica_folder_item_path):
             if not os.path.exists(source_folder_item_path):
-                deleteFolder(replica_folder_item_path, logs_path)
+                if len(list(os.scandir(replica_folder_item_path))) == 0:
+                    deleteFolder(replica_folder_item_path, logs_path)
+                else:
+                    cleanReplicaFolder(replica_folder_item_path, logs_path)
+                    deleteFolder(replica_folder_item_path, logs_path)
         if os.path.isfile(replica_folder_item_path):
             if not os.path.exists(source_folder_item_path):
                 deleteFile(replica_folder_item_path, logs_path)
@@ -98,6 +103,7 @@ def syncFolder(source_folder_path: str, replica_folder_path: str, logs_path: str
 
             if not os.path.exists(replica_folder_item_path):
                 os.mkdir(replica_folder_item_path)
+                saveLogs(datetime.datetime.now(), 'CREATE', source_folder_item_path, replica_folder_item_path, path=logs_path)
             elif os.path.isfile(replica_folder_item_path):
                 os.remove(replica_folder_item_path)
 
@@ -238,6 +244,26 @@ def deleteFile(replica: str, logs_path: str):
     os.remove(replica)
     saveLogs(datetime.datetime.now(), 'DELETE', replica=replica, path=logs_path)
 
+def cleanReplicaFolder(replica: str, logs_path: str):
+    """
+    cleanReplicaFolder: clean the replica folder (subfiles and subfolders) and call the method to record the action performed in the logs.
+
+    Args:
+        replica (string): replica folder path.
+        logs_path (string): logs file path.
+    
+    """
+    for replica_folder_item in os.listdir(replica):
+        replica_folder_item_path = os.path.join(replica, replica_folder_item)
+        if os.path.isdir(replica_folder_item_path):
+            if len(list(os.scandir(replica_folder_item_path))) == 0:
+                deleteFolder(replica_folder_item_path, logs_path)
+            elif len(list(os.scandir(replica_folder_item_path))) != 0:
+                cleanReplicaFolder(replica_folder_item_path, logs_path)
+                deleteFolder(replica_folder_item_path, logs_path)
+        elif os.path.isfile(replica_folder_item_path):
+            deleteFile(replica_folder_item_path, logs_path)
+
 def createFile(source: str, replica: str, logs_path: str, src_modifitcationTime: float):
     """
     createFile: create a file from source to replica and call the method to record the action performed in the logs.
@@ -284,7 +310,7 @@ def saveLogs(timestamp: str, action: str, source=None, replica=None, user='ADMIN
         path (string): logs file path.
 
     """
-    if not os.path.exists(path):
+    if not os.path.exists(os.path.dirname(path)):
         os.makedirs(os.path.dirname(path))
     if action == 'DELETE':
         message = 'Timestamp: {} | Action: {} | From: {} | User: {} |'.format(timestamp, action, replica.replace("\\", "/" ), user)

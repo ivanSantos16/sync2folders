@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sync2folders"
-version = "1.0.1"
+version = "1.0.2"
 description = "Synchronizes source and replica folders"
 authors = ["ivanSantos16 <ivan.rafa.16@gmail.com>"]
 maintainers = ["ivanSantos16 <ivan.rafa.16@gmail.com>"]

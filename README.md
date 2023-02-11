@@ -1,6 +1,6 @@
 <a src='https://www.rplumber.io/'><img src='logo.png' align="right" height="138.5" style="margin:10px;" /></a>
 
-![software-version](https://custom-icon-badges.demolab.com/badge/Version-v1.0.1-gray.svg?labelColor=informational&logo=stack) 
+![software-version](https://custom-icon-badges.demolab.com/badge/Version-v1.0.2-gray.svg?labelColor=informational&logo=stack) 
 ![software-state](https://custom-icon-badges.demolab.com/badge/Status%20-Under%20Development-gray.svg?labelColor=informational&logo=gear) 
 [![PyPI version](https://badge.fury.io/py/sync2folders.svg)](https://badge.fury.io/py/sync2folders)
 
