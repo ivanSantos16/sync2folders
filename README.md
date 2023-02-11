@@ -60,7 +60,7 @@ options:
 - `source` : Source folder path (required) [string]
 - `replica` : Replica folder path (required) [string]
 - `period` : Period of time in seconds between each synchronization (required) [int]
-- `logs` : Logs file path (required) [string]
+- `logs` : Logs file path with extension file (required) [string]
 
 <br>
 
