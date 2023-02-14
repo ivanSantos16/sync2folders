@@ -1,6 +1,6 @@
-<h1 style="text-align: center; color: #00b336">Test Task</h1>
+<h1 style="text-align: center; color: #00b336;">Test Task</h1>
 
-<p style=style="text-align: justify;">Please implement a program that synchronizes two folders: source and replica. The program should maintain a full, identical copy of source folder at replica folder. Solve the test task by writing a program in one of these programming languages:</p>
+<p style="text-align: justify;">Please implement a program that synchronizes two folders: source and replica. The program should maintain a full, identical copy of source folder at replica folder. Solve the test task by writing a program in one of these programming languages:</p>
 
 <p style="text-align: center; background-color: #00b336">Python</p>
 <p style="text-align: center;">C/C++</p>
